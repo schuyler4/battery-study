@@ -7,36 +7,48 @@
 //
 
 import UIKit
+import CoreData
 
 class EntryController: UITableViewController {
     
+    var studys = [Study]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        studys = getStudys()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        let userDefaults = UserDefaults.standard
-        
-        if(!userDefaults.bool(forKey: "studyGoing")) {
-            self.showAlert()
-        }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return studys.count
     }
     
-    func showAlert() {
-        let alert = UIAlertController(title: "Settings", message: "You need to configure some settings before you can start your study", preferredStyle: UIAlertControllerStyle.alert)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
         
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction!) in self.goToSettings()})
-        let laterAction = UIAlertAction(title: "Later", style: UIAlertActionStyle.default, handler: nil)
+        let batteryLabel = cell?.viewWithTag(1) as! UILabel
+        let dateLabel = cell?.viewWithTag(2) as! UILabel
         
-        alert.addAction(okAction)
-        alert.addAction(laterAction)
-        self.present(alert, animated: true, completion: nil)
+        let startBattery = 100.0 + studys[indexPath.row].startBattery
+        let endBattery = 100.0 + studys[indexPath.row].endBattery
+        let totalBattery = Int(startBattery - endBattery)
+        
+        batteryLabel.text = String(totalBattery) + "%"
+        
+        let date = studys[indexPath.row].date
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = DateFormatter.Style.long
+        
+        dateLabel.text = formatter.string(from: date as! Date)
+        return cell!
     }
     
-    func goToSettings() {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "settings") as! StudyController
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "detail") as! DetailController
+        vc.date = studys[indexPath.row].date as! Date
+        vc.startBattery = studys[indexPath.row].startBattery
+        vc.endBattery = studys[indexPath.row].endBattery
         self.present(vc, animated: true, completion: nil)
-        
     }
     
 }
