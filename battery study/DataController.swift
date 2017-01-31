@@ -29,25 +29,33 @@ public func getStudys() -> Array<Study> {
     }
 }
 
-public func storeStudy(startBattery: Float, endBattery: Float, date: Date) {
+public func storeStudy(startBattery: Float, endBattery: Float, date: Date, time: Int) {
     let context = getContext()
     
     let study = NSEntityDescription.entity(forEntityName: "Study", in: context)
-    let addStudy =  NSManagedObject(entity: study!, insertInto: context)
+    let newStudy =  NSManagedObject(entity: study!, insertInto: context)
     
-    addStudy.setValue(startBattery, forKey: "startBattery")
-    addStudy.setValue(endBattery, forKey: "endBattery")
-    addStudy.setValue(date, forKey: "date")
+    newStudy.setValue(startBattery, forKey: "startBattery")
+    newStudy.setValue(endBattery, forKey: "endBattery")
+    newStudy.setValue(date, forKey: "date")
+    newStudy.setValue(time, forKey: "time")
     
     do {
         try context.save()
-        print("saved")
     } catch let error as NSError {
         print("could not save study \(error)")
     }
 }
 
-public func deleteStudy() {
-    print("this will delete")
+public func deleteStudy(index: Int) {
+    let studys = getStudys()
+    let context = getContext()
+    
+    do {
+        context.delete(studys[index])
+        try context.save()
+    } catch let error as NSError {
+        print("could not delete item \(error)")
+    }
 }
     

@@ -48,6 +48,8 @@ class EntryController: UITableViewController {
         vc.date = studys[indexPath.row].date as! Date
         vc.startBattery = studys[indexPath.row].startBattery
         vc.endBattery = studys[indexPath.row].endBattery
+        vc.time = Int(studys[indexPath.row].time)
+        vc.index = indexPath.row
         self.present(vc, animated: true, completion: nil)
     }
     

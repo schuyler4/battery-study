@@ -30,6 +30,9 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         super.viewDidLoad()
         self.populatePickerData()
         
+        timePicker.delegate = self
+        timePicker.dataSource = self
+        
         timeLabel?.text = "0"
         selectedRow = pickerData[timePicker.selectedRow(inComponent: 0)]
         timeProgresBar.progress = 0.0
@@ -55,25 +58,29 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
         if row == 0 {
-            return String(row + 1) + " minute"
+            return "\(String(row + 1)) minute"
         } else {
-            return String(row + 1) + " minutes"
+            return "\(String(row + 1)) minutes"
         }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedRow = pickerData[timePicker.selectedRow(inComponent: 0)]
     }
     
     func startStudy() {
         startBattery = batteryLevel
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
-        timePicker.isHidden = true
-        print(selectedRow)
+        timePicker.isUserInteractionEnabled = false
     }
     
     func update() {
         counter += 1
         timeLabel.text = String(counter)
-        timeProgresBar.progress = Float(counter / selectedRow / 10)
+        let fractionalProgress = (Float(counter) / 60) / Float(selectedRow)
+        timeProgresBar.setProgress(fractionalProgress, animated: true)
+    
         if counter == selectedRow * 60 {
             endStudy(done: true)
         }
@@ -81,10 +88,12 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     
     func endStudy(done: Bool) {
         timer.invalidate()
-        timePicker.isHidden = false
+        timePicker.isUserInteractionEnabled = true
         timeLabel.text = "0"
+        startButton.setTitle("start study", for: .normal)
         counter = 0
         timeProgresBar.progress = 0.0
+        studyGoing = false
         
         if done {
             endBattery = batteryLevel
@@ -100,7 +109,7 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func saveStudy() {
-        storeStudy(startBattery: self.startBattery, endBattery: self.endBattery, date: Date())
+        storeStudy(startBattery: self.startBattery, endBattery: self.endBattery, date: Date(), time: selectedRow)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Entry") as! EntryController
         self.present(vc, animated: true, completion: nil)
     }
@@ -116,6 +125,10 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
             studyGoing = false
             endStudy(done: false)
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        endStudy(done: false)
     }
     
 }
