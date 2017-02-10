@@ -114,6 +114,11 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="Entrys" id="nWK-VP-paz">
+                                    <barButtonItem key="leftBarButtonItem" title="Graph" id="YOf-Qt-feN">
+                                        <connections>
+                                            <segue destination="oLS-De-Q2j" kind="show" id="g6D-Zr-JBK"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" title="+" id="3Us-UI-HJF">
                                         <connections>
                                             <segue destination="uyv-uQ-OIO" kind="show" id="pZI-V6-eG4"/>
@@ -169,6 +174,54 @@
             </objects>
             <point key="canvasLocation" x="-639.20000000000005" y="138.98050974512745"/>
         </scene>
+        <!--Graph Controller-->
+        <scene sceneID="j41-PH-rAu">
+            <objects>
+                <viewController id="oLS-De-Q2j" customClass="GraphController" customModule="battery_study" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EYG-Oj-BDg"/>
+                        <viewControllerLayoutGuide type="bottom" id="85n-4n-W23"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cJq-Us-bwv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2fu-N6-ewp">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Graph" id="pvi-4v-pm8">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="TtJ-Dw-Egl">
+                                            <connections>
+                                                <segue destination="bzl-GG-rU7" kind="show" id="LKl-78-Yi5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIG-8R-Jbx">
+                                <rect key="frame" x="40" y="356" width="240" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wG5-7p-PrJ">
+                                <rect key="frame" x="40" y="220" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="graphView" destination="wG5-7p-PrJ" id="kTG-M4-vkP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E4b-pL-ocj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-639.375" y="869.36619718309862"/>
+        </scene>
         <!--Detail Controller-->
         <scene sceneID="JXA-1y-6yp">
             <objects>
@@ -213,28 +266,10 @@
                                     <action selector="deleteStudyOnClick:" destination="nkB-it-32a" eventType="touchUpInside" id="6Up-iE-E7c"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endbatterylabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0S-uQ-27c">
-                                <rect key="frame" x="0.0" y="121" width="320" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="6fv-J5-anf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vud-Ci-mow">
                                 <rect key="frame" x="0.0" y="141" width="320" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="9wA-5A-6JN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="startBatteryLabel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eb7-fO-JIH">
-                                <rect key="frame" x="0.0" y="101" width="320" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="pxe-Gb-1ke"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
@@ -253,34 +288,26 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="eb7-fO-JIH" firstAttribute="top" secondItem="fsp-2x-8MU" secondAttribute="bottom" constant="17" id="0q2-4r-OWc"/>
                             <constraint firstItem="fsp-2x-8MU" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="1gS-4j-F59"/>
                             <constraint firstItem="Vtd-rx-DW6" firstAttribute="top" secondItem="Vud-Ci-mow" secondAttribute="bottom" id="2Lk-UW-SAu"/>
                             <constraint firstAttribute="trailing" secondItem="reZ-4x-MDC" secondAttribute="trailing" id="2e7-Mh-xvl"/>
                             <constraint firstItem="fsp-2x-8MU" firstAttribute="top" secondItem="reZ-4x-MDC" secondAttribute="bottom" id="3cr-xY-XKn"/>
                             <constraint firstAttribute="trailing" secondItem="Vud-Ci-mow" secondAttribute="trailing" id="B0c-dp-uEe"/>
                             <constraint firstItem="t44-ph-sJd" firstAttribute="top" secondItem="Vfa-Bo-AYR" secondAttribute="bottom" constant="53" id="BY7-cW-x8n"/>
-                            <constraint firstItem="l0S-uQ-27c" firstAttribute="top" secondItem="eb7-fO-JIH" secondAttribute="bottom" id="CFf-eC-vEL"/>
-                            <constraint firstAttribute="trailing" secondItem="eb7-fO-JIH" secondAttribute="trailing" id="Htu-5Y-iHT"/>
                             <constraint firstAttribute="trailing" secondItem="Vtd-rx-DW6" secondAttribute="trailing" id="Hw5-Lw-bcn"/>
                             <constraint firstItem="reZ-4x-MDC" firstAttribute="top" secondItem="K51-il-6VE" secondAttribute="top" id="IqM-Iv-Um3"/>
                             <constraint firstAttribute="trailing" secondItem="Vfa-Bo-AYR" secondAttribute="trailing" id="MyC-8S-RQJ"/>
-                            <constraint firstItem="eb7-fO-JIH" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="N09-nR-9eC"/>
                             <constraint firstAttribute="trailing" secondItem="fsp-2x-8MU" secondAttribute="trailing" id="TyD-p5-4Wg"/>
                             <constraint firstItem="reZ-4x-MDC" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="WUr-M8-7PK"/>
                             <constraint firstItem="Vtd-rx-DW6" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="XXA-Dj-baw"/>
-                            <constraint firstItem="Vud-Ci-mow" firstAttribute="top" secondItem="l0S-uQ-27c" secondAttribute="bottom" id="dR1-Pw-hfb"/>
                             <constraint firstItem="Vud-Ci-mow" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="dq9-PM-gYK"/>
-                            <constraint firstItem="l0S-uQ-27c" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="eWH-DS-Phf"/>
-                            <constraint firstAttribute="trailing" secondItem="l0S-uQ-27c" secondAttribute="trailing" id="jj3-Pi-g91"/>
+                            <constraint firstItem="Vud-Ci-mow" firstAttribute="top" secondItem="fsp-2x-8MU" secondAttribute="bottom" constant="57" id="jVK-lm-mRG"/>
                             <constraint firstItem="Vfa-Bo-AYR" firstAttribute="leading" secondItem="K51-il-6VE" secondAttribute="leading" id="kJr-gX-kFo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="dateLabel" destination="fsp-2x-8MU" id="UvR-gL-uVz"/>
-                        <outlet property="endBatteryLabel" destination="l0S-uQ-27c" id="Ohs-LC-BO8"/>
                         <outlet property="percentLabel" destination="Vtd-rx-DW6" id="04h-D3-3eC"/>
-                        <outlet property="startBatteryLabel" destination="eb7-fO-JIH" id="JHP-NP-KDz"/>
                         <outlet property="timeLabel" destination="Vud-Ci-mow" id="Zk2-gf-uAg"/>
                     </connections>
                 </viewController>
@@ -290,6 +317,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="UZD-Wl-92y"/>
+        <segue reference="9Qb-A0-Khv"/>
     </inferredMetricsTieBreakers>
 </document>

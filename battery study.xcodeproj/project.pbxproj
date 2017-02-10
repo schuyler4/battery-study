@@ -21,6 +21,8 @@
 		A62C09DF1E3EADEE00626DBF /* studyControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62C09DE1E3EADEE00626DBF /* studyControllerTest.swift */; };
 		A62C09E11E3EB3BB00626DBF /* entryControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62C09E01E3EB3BB00626DBF /* entryControllerTests.swift */; };
 		A62C09E31E3EB55A00626DBF /* dataControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62C09E21E3EB55A00626DBF /* dataControllerTests.swift */; };
+		A6EF8F061E4D56C900BD5A0C /* graphControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6EF8F051E4D56C900BD5A0C /* graphControllerTests.swift */; };
+		A6F99EF51E4CFA8500D75B7D /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F99EF41E4CFA8500D75B7D /* GraphController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		A62C09DE1E3EADEE00626DBF /* studyControllerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = studyControllerTest.swift; sourceTree = "<group>"; };
 		A62C09E01E3EB3BB00626DBF /* entryControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = entryControllerTests.swift; sourceTree = "<group>"; };
 		A62C09E21E3EB55A00626DBF /* dataControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = dataControllerTests.swift; sourceTree = "<group>"; };
+		A6EF8F051E4D56C900BD5A0C /* graphControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = graphControllerTests.swift; sourceTree = "<group>"; };
+		A6F99EF41E4CFA8500D75B7D /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 				A62C09D81E3D1B9300626DBF /* StudyController.swift */,
 				A62C09DA1E3D25F000626DBF /* EntryController.swift */,
 				A62C09DC1E3E857000626DBF /* DataController.swift */,
+				A6F99EF41E4CFA8500D75B7D /* GraphController.swift */,
 				A62C09AB1E3D193300626DBF /* Main.storyboard */,
 				A62C09B11E3D193300626DBF /* Assets.xcassets */,
 				A62C09B31E3D193300626DBF /* LaunchScreen.storyboard */,
@@ -133,6 +138,7 @@
 				A62C09DE1E3EADEE00626DBF /* studyControllerTest.swift */,
 				A62C09E01E3EB3BB00626DBF /* entryControllerTests.swift */,
 				A62C09E21E3EB55A00626DBF /* dataControllerTests.swift */,
+				A6EF8F051E4D56C900BD5A0C /* graphControllerTests.swift */,
 			);
 			path = "battery studyTests";
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 				A62C09B01E3D193300626DBF /* battery_study.xcdatamodeld in Sources */,
 				A62C09DB1E3D25F000626DBF /* EntryController.swift in Sources */,
 				A62C09AA1E3D193300626DBF /* DetailController.swift in Sources */,
+				A6F99EF51E4CFA8500D75B7D /* GraphController.swift in Sources */,
 				A62C09A81E3D193300626DBF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +310,7 @@
 				A62C09E31E3EB55A00626DBF /* dataControllerTests.swift in Sources */,
 				A62C09DF1E3EADEE00626DBF /* studyControllerTest.swift in Sources */,
 				A62C09E11E3EB3BB00626DBF /* entryControllerTests.swift in Sources */,
+				A6EF8F061E4D56C900BD5A0C /* graphControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +453,7 @@
 		A62C09D01E3D193300626DBF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UDV9YM23HL;
 				INFOPLIST_FILE = "battery study/Info.plist";
@@ -458,6 +467,7 @@
 		A62C09D11E3D193300626DBF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = UDV9YM23HL;
 				INFOPLIST_FILE = "battery study/Info.plist";
@@ -541,6 +551,7 @@
 				A62C09D11E3D193300626DBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A62C09D21E3D193300626DBF /* Build configuration list for PBXNativeTarget "battery studyTests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +560,7 @@
 				A62C09D41E3D193300626DBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A62C09D51E3D193300626DBF /* Build configuration list for PBXNativeTarget "battery studyUITests" */ = {
 			isa = XCConfigurationList;
@@ -557,6 +569,7 @@
 				A62C09D71E3D193300626DBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

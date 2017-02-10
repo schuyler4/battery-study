@@ -22,25 +22,46 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     var counter = 0
     
     var selectedRow = Int()
-    
-    var startBattery = Float()
-    var endBattery = Float()
+    var batteryLoss = Float()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.populatePickerData()
         
-        timePicker.delegate = self
-        timePicker.dataSource = self
+        timePicker?.delegate = self
+        timePicker?.dataSource = self
         
         timeLabel?.text = "0"
-        selectedRow = pickerData[timePicker.selectedRow(inComponent: 0)]
-        timeProgresBar.progress = 0.0
+        if timePicker != nil {
+            selectedRow = pickerData[timePicker.selectedRow(inComponent: 0)]
+        }
+        timeProgresBar?.progress = 0.0
         UIDevice.current.isBatteryMonitoringEnabled = true
+        
+        NotificationCenter.default.addObserver(self, selector: Selector(("batteryLevelDidChange:")), name: NSNotification.Name.UIDeviceBatteryLevelDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: Selector(("stateChange:")), name: NSNotification.Name.UIDeviceBatteryStateDidChange, object: nil)
+        
+        UIApplication.shared.isIdleTimerDisabled = true
     }
     
-    var batteryLevel: Float {
-        return UIDevice.current.batteryLevel
+    override func viewDidAppear(_ animated: Bool) {
+        if UIDevice.current.batteryState != .unplugged
+        {
+            let alert = UIAlertController(title: "Unplug",
+                                          message: "you should probley unplug unless you want skewed results",
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func batteryLevelDidChang(notification: NotificationCenter) {
+        print("the battery changed")
+        batteryLoss += 1
+    }
+    
+    func stateChange(notification: NotificationCenter) {
+        print("battery state changed")
     }
     
     func populatePickerData() {
@@ -70,7 +91,7 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func startStudy() {
-        startBattery = batteryLevel
+        print("start battery \( UIDevice.current.batteryLevel)")
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
         timePicker.isUserInteractionEnabled = false
     }
@@ -95,8 +116,8 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
         timeProgresBar.progress = 0.0
         studyGoing = false
         
+        print("start battery \( UIDevice.current.batteryLevel)")
         if done {
-            endBattery = batteryLevel
             showSaveAlert()
         }
     }
@@ -109,7 +130,8 @@ class StudyController: UIViewController, UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func saveStudy() {
-        storeStudy(startBattery: self.startBattery, endBattery: self.endBattery, date: Date(), time: selectedRow)
+        print(batteryLoss)
+        storeStudy(batteryLoss: batteryLoss, date: Date(), time: selectedRow)
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Entry") as! EntryController
         self.present(vc, animated: true, completion: nil)
     }

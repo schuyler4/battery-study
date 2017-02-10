@@ -29,14 +29,13 @@ public func getStudys() -> Array<Study> {
     }
 }
 
-public func storeStudy(startBattery: Float, endBattery: Float, date: Date, time: Int) {
+public func storeStudy(batteryLoss: Float, date: Date, time: Int) {
     let context = getContext()
     
     let study = NSEntityDescription.entity(forEntityName: "Study", in: context)
     let newStudy =  NSManagedObject(entity: study!, insertInto: context)
     
-    newStudy.setValue(startBattery, forKey: "startBattery")
-    newStudy.setValue(endBattery, forKey: "endBattery")
+    newStudy.setValue(batteryLoss, forKey: "batteryLoss")
     newStudy.setValue(date, forKey: "date")
     newStudy.setValue(time, forKey: "time")
     

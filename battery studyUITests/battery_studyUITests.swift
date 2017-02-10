@@ -12,25 +12,45 @@ class battery_studyUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
-        
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSelectTableRow() {
+        XCUIApplication().tables.cells.containing(.staticText, identifier:"January 30, 2017").staticTexts["1"].tap()
+        XCUIApplication().navigationBars["Detail"].buttons["back"].tap()
     }
     
+    func testSelectGraphView() {
+        let app = XCUIApplication()
+        app.tables.buttons["Graph"].tap()
+        app.navigationBars["Graph"].buttons["Back"].tap()
+    }
+    
+    /*func testCreateNewStudy() {
+        let app = XCUIApplication()
+        app.tables.buttons["+"].tap()
+        app.alerts["Unplug"].buttons["ok"].tap()
+        app.buttons["Start Study"].tap()
+        app.alerts["Study Done"].buttons["Yes"].tap()
+    }
+    
+    func testDeleteStudy() {
+        let app = XCUIApplication()
+        app.buttons["Delete Study"].tap()
+        app.alerts["Delete"].buttons["Yes"].tap()
+    }*/
+    
+    func testQuitStudy() {
+        let app = XCUIApplication()
+        app.tables.buttons["+"].tap()
+        app.alerts["Unplug"].buttons["ok"].tap()
+        app.buttons["Start Study"].tap()
+        app.buttons["quit study"].tap()
+        app.navigationBars["Study"].buttons["back"].tap()
+    }
 }

@@ -13,16 +13,19 @@ class studyControllerTest: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testViewControllerLoad() {
+    func testViewDidLoad() {
         let vc = StudyController()
-        XCTAssertNotNil(vc.view, "view did not load")
+        vc.viewDidLoad()
+        
+        XCTAssertNotNil(vc.view)
+        //XCTAssert(vc.timePicker?.delegate != nil)
+        //XCTAssert(vc.timePicker?.dataSource != nil)
+        XCTAssert(vc.timeLabel?.text == "0")
     }
 }

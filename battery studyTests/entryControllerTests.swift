@@ -23,11 +23,12 @@ class entryControllerTests: XCTestCase {
     
     func testViewControllerLoad() {
         let vc = EntryController()
-        XCTAssertNotNil(vc.view, "view did not load")
+        XCTAssertNotNil(vc.view)
+        XCTAssert(vc.studys == getStudys())
     }
     
     func testRightNumberOfRows() {
-        let vc = EntryController()
+        let vc: EntryController = EntryController()
         print(vc.tableView.numberOfRows(inSection: 1))
         XCTAssertEqual(getStudys().count, vc.tableView.numberOfRows(inSection: 1))
     }

@@ -11,14 +11,11 @@ import UIKit
 class DetailController: UIViewController {
     
     @IBOutlet var dateLabel: UILabel!
-    @IBOutlet var startBatteryLabel: UILabel!
-    @IBOutlet var endBatteryLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var percentLabel: UILabel!
     
     var date = Date()
-    var startBattery = Float()
-    var endBattery = Float()
+    var batteryLoss = Float()
     var time = Int()
     var index = Int()
     
@@ -29,14 +26,12 @@ class DetailController: UIViewController {
         formatter.dateStyle = DateFormatter.Style.long
         
         dateLabel.text = formatter.string(from: date)
-        startBatteryLabel.text = "start battery: \(String(Int(100 + startBattery)))%"
-        endBatteryLabel.text = "end battery: \(String(Int(100 + endBattery)))%"
         timeLabel.text = "time: \(String(time)):00"
-        percentLabel.text = "total: \(String(Int(-(startBattery - endBattery))))%"
+        percentLabel.text = "loss: \(String(Int(batteryLoss)))%"
     }
     
     @IBAction func deleteStudyOnClick(_ sender: Any) {
-        let alert = UIAlertController(title: "Study Done", message: "are you sure??", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Delete", message: "are you sure??", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {action in self.delete()}))
         alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
